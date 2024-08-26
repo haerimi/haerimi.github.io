@@ -49,6 +49,10 @@ header {
     color: #0056b3;
 }
 
+.logo {
+    font-weight: 600;
+}
+
 /* Hero Section Styles */
 .hero {
     display: flex;
