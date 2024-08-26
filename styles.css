@@ -6,6 +6,11 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* 부드러운 스크롤 */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #f5f7fa;
     color: #333;
@@ -45,11 +50,9 @@ header {
 /* Hero Section Styles */
 .hero {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    text-align: center;
     background-color: #e9f5ff;
     padding: 20px;
     margin-top: 70px;
@@ -70,6 +73,106 @@ header {
     width: 150px;
     border-radius: 50%;
     margin-top: 20px;
+}
+
+.profile-intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.profile-box { 
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 수평 가운데 정렬 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.profile-img {    
+    border-radius: 50%;
+    width: 150px; 
+    height: 150px;
+    object-fit: cover;
+}
+
+.intro-box {
+    flex: 2;
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.intro-box h1 {
+    font-size: 32px;
+    margin: 0;
+}
+
+.intro-box p {
+    font-size: 18px;
+    margin: 10px 0 0;
+}
+
+.oneLine a {
+    font-size: 15px;
+    font-weight: bold;
+    display: inline;
+    margin-right: 10px;
+}
+
+.oneLine a:hover {
+    color: #007BFF; /* 마우스 오버 시 색상 변경 */
+    font-weight: bold; 
+}
+
+/* Skills Section Styles */
+.skills {
+    /* 헤더의 높이만큼 스크롤 마진을 추가 
+        안주면 메뉴 클릭 시 제목 윗부분 잘림 현상 발생 */
+    scroll-margin-top: 40px; 
+    padding: 50px 0;
+    background-color: #f9f9f9; /* 섹션 배경색 */
+    text-align: center;
+}
+
+.skills h2 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px; /* 각 카드 사이의 간격 */
+    max-width: 1000px; /* 전체 컨테이너의 최대 너비 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+.skill-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 150px; /* 카드 너비 */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px); /* 마우스 호버 시 효과 */
+}
+
+.skill-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px; /* 아이콘과 텍스트 사이의 간격 */
+}
+
+.skill-card h4 {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    color: #333;
 }
 
 /* Project Section Styles */
@@ -142,7 +245,8 @@ footer {
     text-align: center;
 }
 
-/* 컨테이너의 크기를 지정 */
+/* 박스 크기를 지정하여 그 크기만큼 이미지가 잘리도록 수정
+    컨테이너의 크기를 지정 */
 .image-container {
     width: 260px; /* 원하는 너비 */
     height: 200px; /* 원하는 높이 */
@@ -163,6 +267,12 @@ footer {
 }
 
 #mini_icon {
-    width: 25px;
-    height: 25px;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+/* 전체 페이지를 100%로 확대 */
+.element {
+    transform: scale(1.1);
 }

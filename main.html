@@ -8,23 +8,64 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <!-- Header -->
     <header>
         <div class="logo">My Portfolio</div>
         <nav class="nav-links">
-            <a href="#home">Home</a>
+            <a href="#about_me">About Me</a>
+            <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>안녕하세요. <br>
-            풀스택 개발자 박해림입니다.</h1>
-        <p> 현재 Programmers에서 풀스택 웹 개발을 배우고 있습니다. <br>
-            계속해서 배우고 성장하는 개발자가 되기 위해 끊임없이 노력하겠습니다.</p>
+    <section class="hero" id="about_me">
+        <div class="profile-intro">
+            <div class="profile-box">
+                <img src="image/mimoge.png" class = "profile-img">   
+                <!-- h5 요소 일렬로 나열 -->
+                <div class = "oneLine">
+                    <a href="https://github.com/haerimi" target="_blank">GitHub</a>
+                    <a href="mailto:yjec14@naver.com">Email</a>
+                    <a href="#contact">Contact</a>
+                </div>           
+            </div>
+            <div class="intro-box">
+                <h1>안녕하세요. <br>
+                    풀스택 개발자 박해림입니다.</h1>
+                <p> 현재 Programmers에서 풀스택 웹 개발을 배우고 있습니다. <br>
+                    계속해서 배우고 성장하는 개발자가 되기 위해 끊임없이 노력하겠습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <!-- Skill Card Example -->
+            <div class="skill-card">
+                <img src="image/html5_icon.png" alt="HTML Icon" class="skill-icon">
+                <h4>HTML</h4>
+            </div>
+            <div class="skill-card">
+                <img src="image/css_icon.png" alt="CSS Icon" class="skill-icon">
+                <h4>CSS</h4>
+            </div>
+            <div class="skill-card">
+                <img src="image/java_icon.png" alt="Java Icon" class="skill-icon">
+                <h4>Java</h4>
+            </div>
+            <div class="skill-card">
+                <img src="image/jsp_icon.png" alt="Jsp Icon" class="skill-icon">
+                <h4>Jsp</h4>
+            </div>
+            <div class="skill-card">
+                <img src="image/unity_icon.png" alt="Unity Icon" class="skill-icon">
+                <h4>Unity</h4>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
@@ -46,7 +87,7 @@
             </div>
             <h3>The Rabbit's Journey</h3>
             <p>토끼의 여행: 궁극의 만두</p>
-            <img src="image/unity_icon.png" id="mini_icon">
+            <img src="image/unity_icon_mini.png" id="mini_icon">
         </div>
     </section>
 
