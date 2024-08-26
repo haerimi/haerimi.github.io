@@ -4,14 +4,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    /* user-select: none; 텍스트 선택 방지 
+    outline: none; /* 포커스 시 아웃라인 제거 */
 }
 
-/* 모든 요소에 대해 입력 커서 방지 */
-body, div, span, p, a, input, textarea {
-    user-select: none; /* 텍스트 선택 방지 */
-    outline: none; /* 포커스 시 아웃라인 제거 */
-  }
-  
 /* 부드러운 스크롤 */
 html {
     scroll-behavior: smooth;
@@ -56,6 +52,7 @@ header {
 /* Hero Section Styles */
 .hero {
     display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -109,7 +106,7 @@ header {
 }
 
 .intro-box h1 {
-    font-size: 32px;
+    font-size: 40px;
     margin: 0;
 }
 
@@ -118,16 +115,47 @@ header {
     margin: 10px 0 0;
 }
 
+.highlight {
+    color: #007BFF;
+}
+
+.oneLine {
+    margin-bottom: 20px;
+}
+
 .oneLine a {
-    font-size: 15px;
+    font-size: 10px;
     font-weight: bold;
     display: inline;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .oneLine a:hover {
     color: #007BFF; /* 마우스 오버 시 색상 변경 */
     font-weight: bold; 
+}
+
+.intro_about_me {
+    background-color: #f0f8ff; /* 배경색 추가 */
+    border-left: 5px solid #007BFF; /* 왼쪽 테두리 추가 */
+    padding: 20px; /* 전체 패딩 추가 */
+    border-radius: 5px; /* 모서리 둥글게 */
+}
+
+.intro_about_me p {
+    font-size: 1.06rem; /* 폰트 크기 조절 */
+    line-height: 1.6; /* 줄 간격 조절 */
+    color: #333; /* 텍스트 색상 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 10px 0; /* 위아래 패딩 추가 */
+    text-align: justify; /* 양쪽 정렬 */
+    text-align-last: left; /* 마지막 줄 왼쪽 정렬 */
+}
+
+.intro_about_me strong {
+    color: #007BFF; /* 강조 텍스트 색상 */
+    font-weight: 600; /* 강조 텍스트 굵기 조절 */
 }
 
 /* Skills Section Styles */
