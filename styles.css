@@ -286,7 +286,7 @@ header {
     margin-top: 20px;
 }
 
-/* 상자 디자인 */
+/* 상자 디자인 구현현 */
 .contact-form form {
     display: flex;
     flex-direction: column;
