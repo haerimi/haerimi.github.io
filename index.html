@@ -99,9 +99,24 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <h2>Contact Me</h2>
-        <a href="mailto:yjec14@naver.com">Email</a>
-        <a href="https://github.com/haerimi" target="_blank">GitHub</a>
-
+        <div class="contact-info">
+            <a href="mailto:yjec14@naver.com" class="contact-link">Email</a>
+            <a href="https://github.com/haerimi" target="_blank" class="contact-link">GitHub</a>
+        </div>
+        <!-- Contact Form Section -->
+        <div class="contact-form">
+            <form action="submit_form.php" method="post">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <button type="submit" onclick="alert('아직 구현되지 않았습니다.')">전송</button>
+            </form>
+        </div>
     </section>
 
     <!-- Footer -->

@@ -275,12 +275,49 @@ header {
     color: #ddd;
 }
 
-/* Footer Styles */
-footer {
-    padding: 20px 0;
-    background-color: #333;
+/* 연락처 폼 섹션 스타일링 */
+.contact-form {
+    padding: 20px;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/* 상자 디자인 */
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none; /* 사용자가 크기를 조정할 수 없도록 설정 */
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #28a745;
     color: white;
-    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #218838;
 }
 
 /* 박스 크기를 지정하여 그 크기만큼 이미지가 잘리도록 수정
@@ -288,11 +325,10 @@ footer {
 .image-container {
     width: 260px; /* 원하는 너비 */
     height: 200px; /* 원하는 높이 */
-    overflow: hidden; /* 넘치는 이미지 부분 숨기기 */
-    position: relative; /* 자식 요소에 대한 절대 위치 지정 가능 */
-    
+     overflow: hidden; /* 넘치는 이미지 부분 숨기기 */
+    position: relative; /* 자식 요소에 대한 절대 위치 지정 가능 */   
 }
-
+    
 /* 이미지 스타일링 */
 .image-container img {
     width: 100%; /* div의 너비에 맞게 이미지 너비 조정 */
@@ -303,11 +339,19 @@ footer {
     left: 50%; /* div의 중앙에 맞춤 */
     transform: translate(-50%, -50%); /* 중앙 정렬 */
 }
-
+    
 #mini_icon {
     margin-top: 5px;
     width: 30px;
     height: 30px;
+}
+
+/* Footer Styles */
+footer {
+    padding: 20px 0;
+    background-color: #333;
+    color: white;
+    text-align: center;
 }
 
 /* 전체 페이지를 100%로 확대 */
