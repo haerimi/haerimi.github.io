@@ -1,58 +1,98 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+/* styles.css */
+
+/* 기본 스타일 초기화 */
+body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
 }
 
-header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
+/* 기본 바디 스타일 */
+body {
+    background-color: white;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 컨테이너 */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 헤더 스타일 */
+.header {
+    background-color: #007bff; /* 파란색 */
+    color: white;
+    padding: 40px 0;
     text-align: center;
 }
 
-header h1 {
-    margin: 0;
+.header h1 {
+    font-size: 2.5rem;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
+.header p {
+    font-size: 1.2rem;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
+/* 이미지 섹션 스타일 */
+.image-section {
+    background-color: #f4f4f4;
+    padding: 40px 0;
+    text-align: center;
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-section {
-    padding: 20px;
+.portfolio-image {
+    max-width: 45%;
     margin: 20px;
-    background: #fff;
-    border-radius: 8px;
+    border: 5px solid #007bff; /* 파란색 */
+}
+
+/* 프로젝트 섹션 스타일 */
+.projects-section {
+    background-color: white;
+    padding: 40px 0;
+}
+
+.projects-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff; /* 파란색 */
 }
 
 .project {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 연락처 섹션 스타일 */
+.contact-section {
+    background-color: #007bff; /* 파란색 */
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.contact-section h2 {
     margin-bottom: 20px;
 }
 
-footer {
+.contact-section a {
+    color: white;
+    text-decoration: none;
+}
+
+/* 푸터 스타일 */
+.footer {
+    background-color: #333;
+    color: white;
     text-align: center;
-    padding: 10px 0;
-    background: #333;
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    padding: 20px 0;
+    margin-top: 20px;
 }
