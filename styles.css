@@ -6,6 +6,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* 모든 요소에 대해 입력 커서 방지 */
+body, div, span, p, a, input, textarea {
+    user-select: none; /* 텍스트 선택 방지 */
+    outline: none; /* 포커스 시 아웃라인 제거 */
+  }
+  
 /* 부드러운 스크롤 */
 html {
     scroll-behavior: smooth;
