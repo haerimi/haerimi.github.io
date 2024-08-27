@@ -215,6 +215,7 @@ header {
 
 /* Project Section Styles */
 .projects {
+    scroll-margin-top: 40px; 
     padding: 50px 0;
     background-color: #fff;
     text-align: center;
