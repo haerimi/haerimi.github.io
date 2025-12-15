@@ -1,7 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Portfolio from './pages/Protpolio';
+import Portfolio from "@/pages/Portfolio";
 
 function App() {
   return (

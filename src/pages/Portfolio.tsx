@@ -1,9 +1,9 @@
-import Footer from '../sections/Footer';
-import Contact from '../sections/Contact';
-import Skills from '../sections/Skills';
-import Projects from '../sections/Projects';
-import Introduce from '../sections/Introduce';
-import Navigation from '../sections/Navigation';
+import Contact from "@/sections/Contact";
+import Footer from "@/sections/Footer";
+import Introduce from "@/sections/Introduce";
+import Navigation from "@/sections/Navigation";
+import Projects from "@/sections/Projects";
+import Skills from "@/sections/Skills";
 
 function Portfolio() {
   return (

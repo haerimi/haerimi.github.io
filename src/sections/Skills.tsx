@@ -1,14 +1,6 @@
 import { motion } from 'framer-motion'
 import { Code2 } from 'lucide-react'
-
-// 기술 스택
-const skills = [
-  { category: 'Frontend', items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'JavaScript', 'html/css'] },
-  { category: 'Backend', items: ['Node.js', 'Nest.js', 'Express', 'TypeORM', 'Java'] },
-  { category: 'Database', items: ['MySQL', 'MariaDB'] },
-  { category: 'DevOps', items: ['GCP', 'Docker', 'GitHub', 'AWS'] },
-  { category: 'Tools', items: ['Slack', 'Notion', 'GitHub', 'Figma']}
-];
+import { skills } from '@/data/skills'
 
 const Skills = () => {
   return (
