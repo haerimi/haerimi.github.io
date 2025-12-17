@@ -1,4 +1,4 @@
-import Card from '@/components/Card'
+import ProjectCard from '@/components/ProjectCard'
 import { motion } from 'framer-motion'
 
 const Projects = () => {
@@ -16,7 +16,7 @@ const Projects = () => {
           <p className="text-slate-400 mb-12 max-w-2xl">
             실제 문제를 해결하고 가치를 창출한 프로젝트들입니다
           </p>
-          <Card />
+          <ProjectCard />
         </motion.div>
       </section>
   )
