@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Github, ExternalLink } from 'lucide-react'
 import { projects } from '@/data/projects'
-const Card = () => {
+const ProjectCard = () => {
     return (
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
             {projects.map((project, index) => (
@@ -11,13 +11,13 @@ const Card = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="group bg-whith-900/50 backdrop-blur-sm rounded-xl overflow-hidden border hover:transition-all duration-300"
+                    className="group bg-white-900/50 backdrop-blur-sm rounded-xl overflow-hidden border hover:transition-all duration-300"
                 >
                     <div className="relative overflow-hidden aspect-video">
                         <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            className="w-full h-full object-cover scale-[1.05] group-hover:scale-[1.1] transition-transform duration-300 "
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
                     </div>
@@ -42,20 +42,24 @@ const Card = () => {
                         </div>
 
                         <div className="flex gap-3">
-                            <a
-                                href={project.github}
-                                className="flex items-center gap-2 text-sm text-black-400 hover:text-slate-400 transition-colors"
-                            >
-                                <Github size={16} />
-                                Code
-                            </a>
-                            <a
-                                href={project.demo}
-                                className="flex items-center gap-2 text-sm text-black-400 hover:text-slate-400 transition-colors"
-                            >
-                                <ExternalLink size={16} />
-                                Demo
-                            </a>
+                            {project.github && (
+                                <a
+                                    href={project.github}
+                                    className="flex items-center gap-2 text-sm text-black-400 hover:text-slate-400 transition-colors"
+                                >
+                                    <Github size={16} />
+                                    Code
+                                </a>
+                            )}
+
+                            {project.demo && (
+                                <a
+                                    href={project.demo}
+                                    className="flex items-center gap-2 text-sm text-black-400 hover:text-slate-400 transition-colors"
+                                >
+                                    <ExternalLink size={16} />
+                                    Demo
+                                </a>)}
                         </div>
                     </div>
                 </motion.div>
@@ -64,4 +68,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default ProjectCard

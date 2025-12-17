@@ -15,10 +15,10 @@ const Contact = () => {
                     </h2>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <div className="flex flex-wrap gap-2 mb-4">
-                            <a href="https://github.com/haerimi" className="px-3 py-1 text-white rounded-full text-xs border border-white-300/20">
+                            <a href="https://github.com/haerimi" className="px-3 py-1 text-white rounded-full text-xs border border-white-20">
                                 Github
                             </a>
-                            <a href="mailto:yjec14@naver.com" className="px-3 py-1 text-white rounded-full text-xs border border-white-300/20">
+                            <a href="mailto:yjec14@naver.com" className="px-3 py-1 text-white rounded-full text-xs border border-white-20">
                                 E-Mail
                             </a>
                         </div>

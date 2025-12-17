@@ -33,10 +33,10 @@ const Introduce = () => {
             transition={{ delay: 0.4 }}
             className="flex gap-6 justify-center mt-12"
           >
-            <a href="https://github.com/haerimi" className="text-slate-400 hover:text-black transition-colors">
+            <a href="https://github.com/haerimi" className="text-slate-400 hover:text-black transition-colors" target="_blank">
               <Github size={24} />
             </a>
-            <a href="mailto:yjec14@naver.com" className="text-slate-400 hover:text-black transition-colors">
+            <a href="mailto:yjec14@naver.com" className="text-slate-400 hover:text-black transition-colors" target="_blank">
               <Mail size={24} />
             </a>
           </motion.div>
