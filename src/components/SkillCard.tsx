@@ -15,7 +15,7 @@ const SkillCard = () => {
                     Tech Stack
                 </h2>
                 <p className="text-slate-400 mb-12 max-w-2xl">
-                    지속적으로 학습하고 성장하는 기술 스택입니다
+                    프로젝트를 통해 익히고 활용하는 기술들입니다
                 </p>
 
                 <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-6">

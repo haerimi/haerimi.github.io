@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Project, projects } from '@/data/projects'
 import { useState } from 'react'
 import { Portal } from '@headlessui/react'
+import ProjectModal from '@/components/ProjectModal'
 import Modal from '@/components/Modal'
 
 const Projects = () => {
@@ -20,7 +21,7 @@ const Projects = () => {
           Feature Project
         </h2>
         <p className="text-slate-400 mb-12 max-w-2xl">
-          실제 문제를 해결하고 가치를 창출한 프로젝트들입니다
+          아이디어를 실제 서비스로 구현한 프로젝트들입니다
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
           {projects.map((project, index) => (
@@ -32,11 +33,15 @@ const Projects = () => {
         </div>
         {selectedProject && (
           <Portal>
-            <Modal
-              open={!!selectedProject}
-              onClose={() => setSelectedProject(null)}
-              project={selectedProject}
-            />
+            <Modal open={!!selectedProject} onClose={() => setSelectedProject(null)}>
+              {selectedProject && (
+                <ProjectModal
+                  key="project-modal"
+                  project={selectedProject}
+                  onClose={() => setSelectedProject(null)}
+                />
+              )}
+            </Modal>
           </Portal>
         )}
       </motion.div>

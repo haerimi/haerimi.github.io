@@ -10,7 +10,7 @@ const Introduce = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 break-keep word-break">
               안녕하세요.
               <br />
               저는 개발자{' '}
@@ -19,10 +19,10 @@ const Introduce = () => {
               </span>
               입니다.
             </h1>
-            <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-2xl mx-auto">
-              사용자 경험을 최우선으로 생각하는 풀스택 개발자입니다.
+            <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-2xl mx-auto break-keep word-break">
+              사용자 중심의 웹 서비스를 만드는 풀스택 개발자입니다.
               <br />
-              깔끔한 코드와 효율적인 시스템 구축에 집중합니다.
+              읽기 쉬운 코드와 유지보수하기 좋은 구조를 고민하며 개발합니다.
             </p>
           </motion.div>
 
