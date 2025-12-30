@@ -1,4 +1,4 @@
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
@@ -23,7 +23,7 @@ const Modal = ({ open, onClose, children, maxWidth = "max-w-4xl"}: ModalProps) =
                     />
 
                     <div className="fixed inset-0 z-10 overflow-y-auto">
-                        <div className="flex min-h-screen items-center justify-center p-4">
+                        <div className="flex min-h-screen items-center justify-center p-4 pt-20">
                             <DialogPanel
                                 as={motion.div}
                                 initial={{ opacity: 0, y: 100 }}

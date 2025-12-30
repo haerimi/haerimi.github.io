@@ -12,17 +12,17 @@ const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
     return (
         <motion.div
             onClick={onClick}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group bg-white-900/50 backdrop-blur-sm rounded-xl overflow-hidden border hover:transition-all duration-300 cursor-pointer"
-        >
+            className="group bg-white-900/50 rounded-xl overflow-hidden border cursor-pointer will-change-opacity">
             <div className="relative overflow-hidden aspect-video">
                 <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover scale-[1.05] group-hover:scale-[1.1] transition-transform duration-300 "
+                    loading="eager"
+                    className="w-full h-full object-cover scale-[1.05] group-hover:scale-105 transition-transform duration-300 "
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
             </div>

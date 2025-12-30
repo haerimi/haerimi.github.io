@@ -2,7 +2,7 @@ import { DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Project } from '@/data/projects'
 import ReactMarkdown from 'react-markdown'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Modal from '@/components/Modal'
 
 interface ProjectDetailProps {
@@ -12,6 +12,23 @@ interface ProjectDetailProps {
 
 export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
+
+    const memoMarkdown = useMemo(() => (
+        <ReactMarkdown components={{
+            h3: ({ node, ...props }) => (
+                <h3 className="text-xl font-bold text-gray-900 mt-6 mb-2" {...props} />
+            ),
+            p: ({ node, ...props }) => (
+                <p className="mb-4 leading-relaxed text-gray-600" {...props} />
+            ),
+            strong: ({ node, ...props }) => (
+                <strong className="font-bold text-gray-500" {...props} />
+            )
+        }}
+        >
+            {project.details?.overview.description}
+        </ReactMarkdown>
+    ), [project.details?.overview.description])
 
     return (
         <>
@@ -30,22 +47,11 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
                         <img
                             src={project.details?.overview.image}
                             alt={project.title}
+                            loading="lazy"
                             className="rounded-lg mb-4 w-full aspect-video object-cover "
                         />
                         <div className="text-sm text-gray-500 prose prose-slate max-w-none">
-                            <ReactMarkdown components={{
-                                h3: ({ node, ...props }) => (
-                                    <h3 className="text-xl font-bold text-gray-900 mt-6 mb-2" {...props} />
-                                ),
-                                p: ({ node, ...props }) => (
-                                    <p className="mb-4 leading-relaxed text-gray-600" {...props} />
-                                ),
-                                strong: ({ node, ...props }) => (
-                                    <strong className="font-bold text-gray-500" {...props} />
-                                )
-                            }}
-                            >
-                                {project.details?.overview.description}</ReactMarkdown>
+                            {memoMarkdown}
                         </div>
                         <br />
                         {project.details.features && (
@@ -57,30 +63,35 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
                                         <p className="text-sm text-gray-600 pl-3">
                                             {feature.description}
                                         </p>
-                                        <div className="w-full h-[250px] bg-gray-100 rounded-lg overflow-hidden mb-4">
+                                        <picture className="w-full h-[250px] bg-gray-100 rounded-lg overflow-hidden mb-4">
+                                            {feature.webpSrc && <source srcSet={feature.webpSrc} type="image/webp" />}
                                             <img
                                                 src={feature.image}
                                                 alt={feature.title}
+                                                loading="lazy"
                                                 onClick={() => setSelectedImg(feature.image)}
                                                 className="w-full h-full object-contain cursor-zoom-in"
                                             />
-                                        </div>
+                                        </picture>
                                     </div>
                                 ))}
-                                <Modal
-                                    key="image-modal"
-                                    open={!!selectedImg}
-                                    onClose={() => setSelectedImg(null)}
-                                    maxWidth="sm:max-w-3xl "
-                                >
-                                    <div className="relative p-2 flex flex-col items-center">
-                                        <button onClick={() => setSelectedImg(null)}
-                                            className="absolute right-4 top-4 z-50 text-white bg-black/40 backdrop-blur-sm rounded-full p-1.5 hover:bg-black/70 transition-all">
-                                            <XMarkIcon className="size-8" />
-                                        </button>
-                                        <img src={selectedImg!} className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-lg mx-auto" />
-                                    </div>
-                                </Modal>
+                                {selectedImg && (
+                                    <Modal
+                                        key="image-modal"
+                                        open={true}
+                                        onClose={() => setSelectedImg(null)}
+                                        maxWidth="sm:max-w-3xl "
+                                    >
+                                        <div className="relative p-2 flex flex-col items-center">
+                                            <button onClick={() => setSelectedImg(null)}
+                                                className="absolute right-4 top-4 z-50 text-white bg-black/40 rounded-full p-1.5 hover:bg-black/70 transition-all">
+                                                <XMarkIcon className="size-8" />
+                                            </button>
+                                            <img src={selectedImg!} className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-lg mx-auto"
+                                                alt={selectedImg} />
+                                        </div>
+                                    </Modal>
+                                )}
                             </div>
                         )}
 

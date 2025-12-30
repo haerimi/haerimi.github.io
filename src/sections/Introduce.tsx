@@ -20,7 +20,7 @@ const Introduce = () => {
               입니다.
             </h1>
             <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-2xl mx-auto break-keep word-break">
-              사용자 중심의 웹 서비스를 만드는 풀스택 개발자입니다.
+              사용자 중심의 웹 서비스를 만드는 프론트엔드 개발자입니다.
               <br />
               읽기 쉬운 코드와 유지보수하기 좋은 구조를 고민하며 개발합니다.
             </p>
