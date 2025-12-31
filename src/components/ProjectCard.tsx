@@ -15,15 +15,18 @@ const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.05 }}
             className="group bg-white-900/50 rounded-xl overflow-hidden border cursor-pointer will-change-opacity">
             <div className="relative overflow-hidden aspect-video">
-                <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="eager"
-                    className="w-full h-full object-cover scale-[1.05] group-hover:scale-105 transition-transform duration-300 "
-                />
+                <picture>
+                    {project.webpSrc && <source srcSet={project.webpSrc} type="image/webp" />}
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        loading={index < 2 ? "eager" : "lazy"}
+                        className="w-full h-full object-cover scale-[1.05] group-hover:scale-105 transition-transform duration-300 "
+                    />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
             </div>
 
