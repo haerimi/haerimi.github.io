@@ -23,7 +23,7 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
             ),
             strong: ({ node, ...props }) => (
                 <strong className="font-bold text-gray-500" {...props} />
-            )
+            ),
         }}
         >
             {project.details?.overview.description}
@@ -56,7 +56,7 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
                         <br />
                         {project.details.features && (
                             <div className="space-y-6">
-                                <h4 className="font-bold text-lg border-b pb-2 ">Features</h4>
+                                <h4 className="font-bold text-lg border-b pb-2 ">주요 기능</h4>
                                 {project.details.features.map((feature, index) => (
                                     <div key={index} className="flex flex-col gap-2">
                                         <h5 className="font-semibold text-gray-900">· {feature.title}</h5>
@@ -73,6 +73,52 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
                                                 className="w-full h-full object-contain cursor-zoom-in"
                                             />
                                         </picture>
+                                    </div>
+                                ))}
+                                {selectedImg && (
+                                    <Modal
+                                        key="image-modal"
+                                        open={true}
+                                        onClose={() => setSelectedImg(null)}
+                                        maxWidth="sm:max-w-3xl "
+                                    >
+                                        <div className="relative p-2 flex flex-col items-center">
+                                            <button onClick={() => setSelectedImg(null)}
+                                                className="absolute right-4 top-4 z-50 text-white bg-black/40 rounded-full p-1.5 hover:bg-black/70 transition-all">
+                                                <XMarkIcon className="size-8" />
+                                            </button>
+                                            <img src={selectedImg!} className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-lg mx-auto"
+                                                alt={selectedImg} />
+                                        </div>
+                                    </Modal>
+                                )}
+                            </div>
+                        )}
+
+                        {project.details.diagrams && (
+                            <div className="space-y-6">
+                                <h4 className="font-bold text-lg border-b pb-2 ">시스템 아키텍처</h4>
+                                {project.details.diagrams.map((feature, index) => (
+                                    <div key={index} className="flex flex-col gap-2">
+                                        <h5 className="font-semibold text-gray-900">{feature.title}</h5>
+                                        <div className="whitespace-pre-line text-sm text-gray-600">
+                                            <ReactMarkdown
+                                                components={{
+                                                    h4: ({ children }) => <h4 className="font-bold text-base">{children}</h4>,
+                                                }}
+                                            >                                                
+                                            {feature.description}
+                                            </ReactMarkdown>
+                                        </div>
+                                        <div className="w-full h-[250px] bg-gray-100 rounded-lg overflow-hidden mb-4">
+                                            <img
+                                                src={feature.image}
+                                                alt={feature.title}
+                                                loading="lazy"
+                                                onClick={() => setSelectedImg(feature.image)}
+                                                className="w-full h-full object-contain cursor-zoom-in"
+                                            />
+                                        </div>
                                     </div>
                                 ))}
                                 {selectedImg && (
