@@ -26,7 +26,7 @@ const SkillCard = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-white backdrop-blur-sm rounded-xl p-6 hover:border-blue-500/50 transition-all"
+                            className="bg-white rounded-xl p-6 hover:border-blue-500/50 transition-all"
                         >
                             <div className="flex items-center gap-3 mb-4">
                                 <Code2 className="text-black-400" size={24} />
