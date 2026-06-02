@@ -24,7 +24,7 @@ const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
                         src={project.image}
                         alt={project.title}
                         loading={index < 2 ? "eager" : "lazy"}
-                        className="w-full h-full object-cover scale-[1.05] group-hover:scale-105 transition-transform duration-300 "
+                        className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-300"
                     />
                 </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
@@ -53,6 +53,8 @@ const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
                     {project.github && (
                         <a
                             href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
                             className="flex items-center gap-2 text-sm text-black-400 hover:text-slate-400 transition-colors"
                         >
                             <Github size={16} />
@@ -62,6 +64,8 @@ const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
                     {project.demo && (
                         <a
                             href={project.demo}
+                            target="_blank"
+                            rel="noreferrer"
                             className="flex items-center gap-2 text-sm text-black-400 hover:text-slate-400 transition-colors"
                         >
                             <ExternalLink size={16} />

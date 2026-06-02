@@ -16,11 +16,11 @@ const FeatureItem = React.memo(({ feature, onImageClick }: { feature: FeatureDet
         <h5 className="font-semibold text-gray-900">· {feature.title}</h5>
         <p className="text-sm text-gray-600 pl-3">{feature.description}</p>
         <picture
-            className="w-full h-[250px] cursor-zoom-in bg-gray-100 rounded-lg overflow-hidden mb-4"
+            className="block w-full h-[360px] cursor-zoom-in bg-gray-100 rounded-lg overflow-hidden mb-4"
             onClick={() => onImageClick(feature)}
         >
             {feature.webpSrc && <source srcSet={feature.webpSrc} type="image/webp" />}
-            <img src={feature.image} loading="lazy" decoding="async" className="w-full h-full object-contain" />
+            <img src={feature.image} alt={feature.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
         </picture>
     </div>
 ));
@@ -124,11 +124,11 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
                             className="absolute right-4 top-4 z-50 text-white bg-black/40 rounded-full p-1.5 hover:bg-black/70 transition-all">
                             <XMarkIcon className="size-8" />
                         </button>
-                        <picture >
+                        <picture className="block w-full">
                             {selectedImg.webpSrc && <source srcSet={selectedImg.webpSrc} type="image/webp" />}
                             <img src={selectedImg.image}
                                 decoding="async"
-                                className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-lg mx-auto"
+                                className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                                 alt={selectedImg.title} />
                         </picture>
                     </div>
