@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.58395df9.css",
-    "main.js": "/static/js/main.7973234c.js",
+    "main.css": "/static/css/main.5cee7fdc.css",
+    "main.js": "/static/js/main.4efd64b6.js",
     "static/js/453.80be4856.chunk.js": "/static/js/453.80be4856.chunk.js",
     "static/media/trip-3.png": "/static/media/trip-3.6d6be19dcb0fc57605d1.png",
     "static/media/trip-1.png": "/static/media/trip-1.38d0b56454c740547f6e.png",
@@ -27,25 +27,28 @@
     "static/media/game.jpg": "/static/media/game.fb53ac65bfacfba72a15.jpg",
     "static/media/automation.webp": "/static/media/automation.64e7119e145e21924b13.webp",
     "static/media/code.jpg": "/static/media/code.d108fad69db38854cc3c.jpg",
+    "static/media/cluepot_schedule.png": "/static/media/cluepot_schedule.85d57affa5e267fede72.png",
     "static/media/game.webp": "/static/media/game.f7ac9dcb960ecf7479a8.webp",
-    "static/media/market.svg": "/static/media/market.541474603b9c7c934224dfedcc838be8.svg",
-    "static/media/marketProduct.svg": "/static/media/marketProduct.c43144e1330ce349421f21f85fb55c7b.svg",
-    "static/media/marketing.svg": "/static/media/marketing.fc1244d55dbe9d411123e530798bb574.svg",
+    "static/media/cluepot_pini_result.png": "/static/media/cluepot_pini_result.0f983106d6098001653c.png",
     "static/media/pengdi-1.png": "/static/media/pengdi-1.a072298b00b3156c678a.png",
     "static/media/silo.webp": "/static/media/silo.a017c0c812752290eb47.webp",
+    "static/media/cluepot_preference.png": "/static/media/cluepot_preference.5cf4cef723db098f93b4.png",
     "static/media/pengdi-2.png": "/static/media/pengdi-2.7ef3aabe7a3a516fe3b8.png",
     "static/media/pengdi-3.webp": "/static/media/pengdi-3.d513c6f673bf49a2794e.webp",
+    "static/media/cluepot_ready.png": "/static/media/cluepot_ready.4dcc418fbc0ceded0ac6.png",
+    "static/media/cluepot_calendar.png": "/static/media/cluepot_calendar.f6c7ed225b316a12c2d1.png",
     "static/media/silo-3.webp": "/static/media/silo-3.d329daea171289ebf6d8.webp",
     "static/media/pengdi.webp": "/static/media/pengdi.dfb83c6486ac37b05f62.webp",
     "static/media/silo-1.webp": "/static/media/silo-1.ca3d097d11b1413e0a37.webp",
     "static/media/silo-2.webp": "/static/media/silo-2.9272c04a27f7c6b7ef20.webp",
+    "static/media/cluepot_main_image.png": "/static/media/cluepot_main_image.525f8d7bb6f5539d9085.png",
     "index.html": "/index.html",
-    "main.58395df9.css.map": "/static/css/main.58395df9.css.map",
-    "main.7973234c.js.map": "/static/js/main.7973234c.js.map",
+    "main.5cee7fdc.css.map": "/static/css/main.5cee7fdc.css.map",
+    "main.4efd64b6.js.map": "/static/js/main.4efd64b6.js.map",
     "453.80be4856.chunk.js.map": "/static/js/453.80be4856.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.58395df9.css",
-    "static/js/main.7973234c.js"
+    "static/css/main.5cee7fdc.css",
+    "static/js/main.4efd64b6.js"
   ]
 }
