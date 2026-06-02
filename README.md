@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# 박해림 포트폴리오
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 풀스택 개발자 박해림의 개인 포트폴리오 웹사이트
 
-## Available Scripts
+🔗 **Live** → [haerimi.github.io](https://haerimi.github.io)
 
-In the project directory, you can run:
+<br/>
 
-### `npm start`
+## 기술 스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| 분류 | 기술 |
+|------|------|
+| Framework | React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS v3 |
+| Animation | Framer Motion |
+| UI Components | Headless UI, Heroicons, Lucide React |
+| Markdown | React Markdown |
+| Build | CRACO |
+| Deploy | GitHub Pages |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br/>
 
-### `npm test`
+## 주요 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **프로젝트 카드** — 호버 시 줌인 효과, 카드 클릭으로 상세 모달 오픈
+- **프로젝트 모달** — 개요(Markdown 렌더링), Feature 이미지, 기간·역할·기술 스택 표시
+- **이미지 확대** — Feature 이미지 클릭 시 풀스크린 확대 모달
+- **이미지 최적화** — WebP + PNG 폴백(`<picture>` 태그), lazy loading
+- **기술 스택 섹션** — 카테고리별 보유 기술 목록
+- **반응형** — 데스크탑·모바일 대응
 
-### `npm run build`
+<br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 프로젝트 구조
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+src/
+├── assets/image/       # 프로젝트별 이미지 (webp + png)
+├── components/
+│   ├── Modal.tsx        # 범용 모달 (Headless UI Dialog)
+│   ├── ProjectCard.tsx  # 프로젝트 카드
+│   ├── ProjectModal.tsx # 프로젝트 상세 모달
+│   └── SkillCard.tsx    # 기술 스택 카드
+├── data/
+│   ├── projects.ts      # 프로젝트 데이터
+│   └── skills.ts        # 기술 스택 데이터
+├── pages/
+│   └── Portfolio.tsx    # 메인 페이지
+└── sections/
+    ├── Introduce.tsx    # 히어로 섹션
+    ├── Navigation.tsx   # 네비게이션
+    ├── Projects.tsx     # 프로젝트 섹션
+    ├── Skills.tsx       # 기술 스택 섹션
+    ├── Contact.tsx      # 연락처 섹션
+    └── Footer.tsx       # 푸터
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `npm run eject`
+## 로컬 실행
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+# 패키지 설치
+npm install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 개발 서버 실행 (localhost:3000)
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 배포
 
-## Learn More
+```bash
+# GitHub Pages 배포
+npm run deploy
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`predeploy` 스크립트로 빌드 후 자동으로 `gh-pages` 브랜치에 배포됩니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
+
+## 프로젝트 추가 방법
+
+[src/data/projects.ts](src/data/projects.ts)에 `Project` 타입에 맞게 데이터를 추가하고,  
+이미지는 `src/assets/image/{프로젝트명}/` 폴더에 webp + png 쌍으로 넣으면 됩니다.
