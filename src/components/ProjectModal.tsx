@@ -11,7 +11,7 @@ interface ProjectDetailProps {
     onClose: () => void
 }
 
-const FeatureItem = React.memo(({ feature, onImageClick }: { feature: FeatureDetail, onImageClick: (f: any) => void }) => (
+const FeatureItem = React.memo(({ feature, onImageClick }: { feature: FeatureDetail, onImageClick: (f: FeatureDetail) => void }) => (
     <div className="flex flex-col gap-2">
         <h5 className="font-semibold text-gray-900">· {feature.title}</h5>
         <p className="text-sm text-gray-600 pl-3">{feature.description}</p>
@@ -34,14 +34,14 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
     
     const memoMarkdown = useMemo(() => (
         <ReactMarkdown components={{
-            h3: ({ node, ...props }) => (
-                <h3 className="text-xl font-bold text-gray-900 mt-6 mb-2" {...props} />
+            h3: ({ children }) => (
+                <h3 className="text-xl font-bold text-gray-900 mt-6 mb-2">{children}</h3>
             ),
-            p: ({ node, ...props }) => (
-                <p className="mb-4 leading-relaxed text-gray-600" {...props} />
+            p: ({ children }) => (
+                <p className="mb-4 leading-relaxed text-gray-600">{children}</p>
             ),
-            strong: ({ node, ...props }) => (
-                <strong className="font-bold text-gray-500" {...props} />
+            strong: ({ children }) => (
+                <strong className="font-bold text-gray-500">{children}</strong>
             )
         }}
         >
