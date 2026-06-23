@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5cee7fdc.css",
-    "main.js": "/static/js/main.ea580c40.js",
+    "main.js": "/static/js/main.8f478554.js",
     "static/js/453.80be4856.chunk.js": "/static/js/453.80be4856.chunk.js",
     "static/media/trip-3.png": "/static/media/trip-3.6d6be19dcb0fc57605d1.png",
     "static/media/trip-1.png": "/static/media/trip-1.38d0b56454c740547f6e.png",
@@ -11,20 +11,24 @@
     "static/media/trip-4.png": "/static/media/trip-4.e0a90e56944b9672e066.png",
     "static/media/silo-2.png": "/static/media/silo-2.f627111286ee95c51c13.png",
     "static/media/automation.png": "/static/media/automation.9641a193793abd3774bf.png",
-    "static/media/silo-1.png": "/static/media/silo-1.59a87d252273a66c50f7.png",
     "static/media/silo.png": "/static/media/silo.e6f5014475e7fdb98d4a.png",
     "static/media/silo-3.png": "/static/media/silo-3.23e8b1336148e5e1b459.png",
+    "static/media/game-5.png": "/static/media/game-5.766a3c416d528972cdc2.png",
     "static/media/icon.png": "/static/media/icon.1627a638dd9a10a26579.png",
     "static/media/Pretendard-Regular.woff2": "/static/media/Pretendard-Regular.38bed7de46e7b9049ced.woff2",
+    "static/media/game-2.png": "/static/media/game-2.260857197455fa4a83ab.png",
     "static/media/pengdi-3.png": "/static/media/pengdi-3.b5d6eb4063ba8c44c615.png",
     "static/media/trip-3.webp": "/static/media/trip-3.77523a2b67341fec5e3b.webp",
+    "static/media/game-1.png": "/static/media/game-1.ca32d2c26df8f0586c00.png",
     "static/media/trip-1.webp": "/static/media/trip-1.a6c630080611bc449456.webp",
     "static/media/trip-2.webp": "/static/media/trip-2.ccc9ae8ed34d4c5139f6.webp",
+    "static/media/game-4.png": "/static/media/game-4.d6730e4abdcb522f2297.png",
     "static/media/trip.webp": "/static/media/trip.f2584cb19f8fcac8b07c.webp",
     "static/media/pengdi.png": "/static/media/pengdi.0742ff8577052db766a2.png",
     "static/media/trip-4.webp": "/static/media/trip-4.d0ffff411752c0e358f6.webp",
     "static/media/trip-5.webp": "/static/media/trip-5.d8e6985a1aa3c13c17b2.webp",
     "static/media/game.jpg": "/static/media/game.fb53ac65bfacfba72a15.jpg",
+    "static/media/silo-4.png": "/static/media/silo-4.f5769179964c69bfeafb.png",
     "static/media/automation.webp": "/static/media/automation.64e7119e145e21924b13.webp",
     "static/media/code.jpg": "/static/media/code.d108fad69db38854cc3c.jpg",
     "static/media/cluepot_schedule.png": "/static/media/cluepot_schedule.e897729744fee9968faf.png",
@@ -40,15 +44,14 @@
     "static/media/pengdi-3.webp": "/static/media/pengdi-3.d513c6f673bf49a2794e.webp",
     "static/media/silo-3.webp": "/static/media/silo-3.d329daea171289ebf6d8.webp",
     "static/media/pengdi.webp": "/static/media/pengdi.dfb83c6486ac37b05f62.webp",
-    "static/media/silo-1.webp": "/static/media/silo-1.ca3d097d11b1413e0a37.webp",
     "static/media/silo-2.webp": "/static/media/silo-2.9272c04a27f7c6b7ef20.webp",
     "index.html": "/index.html",
     "main.5cee7fdc.css.map": "/static/css/main.5cee7fdc.css.map",
-    "main.ea580c40.js.map": "/static/js/main.ea580c40.js.map",
+    "main.8f478554.js.map": "/static/js/main.8f478554.js.map",
     "453.80be4856.chunk.js.map": "/static/js/453.80be4856.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5cee7fdc.css",
-    "static/js/main.ea580c40.js"
+    "static/js/main.8f478554.js"
   ]
 }
