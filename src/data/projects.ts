@@ -178,7 +178,7 @@ export const projects: Project[] = [
         id: 3,
         title: 'CluePot',
         description: '참가자의 위치·교통수단·분위기 선호를 분석해 모두에게 공정한 모임 장소를 AI가 추천하는 서비스',
-        tech: ['Next.js', 'TypeScript', 'Prisma', 'Supabase', 'Gemini AI', 'Kakao Maps API'],
+        tech: ['Next.js', 'TypeScript', 'Prisma', 'Supabase', 'Gemini AI', 'Kakao Maps API', 'React Native'],
         github: 'https://github.com/haerimi/Cluepot.git',
         demo: 'https://cluepot.vercel.app',
         image: cluepotImg,
@@ -194,6 +194,7 @@ export const projects: Project[] = [
 
 Gemini API **503 과부하** 상황에서 지수 백오프(1s→2s→4s) 재시도와, 지오코딩 실패 시 AI가 직접 지역을 추론하는 **fallback**을 설계해 안정적인 추천 파이프라인을 구성했습니다.
 
+웹 서비스 개발 후 **React Native로 앱 버전을 추가 개발**했습니다.
 ### 🤖 AI 활용
 **Claude Code · ChatGPT**를 개발 도구로 활용했습니다.
 코드 작성, 코드 리뷰, 디버깅·트러블슈팅 전반에서 AI가 초안을 작성하면 직접 검토·수정하며 프로젝트를 완성했습니다.
