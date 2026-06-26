@@ -142,6 +142,35 @@ export const projects: Project[] = [
                     webpSrc: trip10,
                 }
             ],
+            troubleshooting: [
+                {
+                    title: '게시글 전체가 동일한 댓글 목록을 공유하는 버그',
+                    symptom: '특정 게시글에 달린 댓글이 다른 게시글에서도 동일하게 표시되었습니다. 어떤 글을 열어도 댓글 내용이 같았습니다.',
+                    approach: '처음에는 프론트엔드에서 댓글 상태를 게시글 전환 시 초기화하지 않는 문제라고 판단했습니다. 상태 초기화 로직을 점검했지만 이상이 없었습니다. API 응답을 직접 확인하니 서버가 postId와 무관하게 댓글 전체를 반환하고 있었고, 원인이 백엔드에 있다는 것을 파악했습니다.',
+                    cause: 'Comments 엔티티에 @ManyToOne과 @JoinColumn으로 관계는 선언했지만, postId를 @Column()으로 별도 속성으로 선언하지 않았습니다. TypeORM에서 find({ where: { postId } })로 필터링하려면 해당 필드가 @Column() 데코레이터로 명시되어 있어야 합니다. 선언이 없으면 find({ where: { postId } })에서 postId를 조회 조건으로 인식하지 못해 댓글 전체가 반환되었습니다.',
+                    solution: 'Comments 엔티티에 @Column() postId!: number를 추가해 find({ where: { postId } })에서 postId를 정상적으로 조회 조건으로 사용할 수 있도록 수정했습니다.',
+                    result: '각 게시글이 자신에게 달린 댓글만 정확히 표시되었습니다.',
+                    learned: 'TypeORM에서 관계 선언과 컬럼 선언은 서로 다른 역할을 합니다. ORM이 자동으로 처리해 줄 것이라고 가정하기보다, 실제 쿼리가 어떻게 생성되는지 확인하는 습관이 중요하다는 점을 배웠습니다.',
+                },
+                {
+                    title: '댓글 삭제 시 404 에러 — 매개변수 순서 오류',
+                    symptom: '댓글 삭제 버튼을 누르면 404 에러가 반환되었습니다. 동일한 엔드포인트를 Postman으로 직접 호출하면 정상 동작했습니다.',
+                    approach: 'API 경로와 인증 토큰에 문제가 없는지 먼저 확인했습니다. 요청 URL과 헤더는 정확했습니다. 이후 실제 함수 호출부를 열어 각 매개변수에 어떤 값이 전달되는지 하나씩 출력해 봤습니다.',
+                    cause: '서비스 함수 시그니처는 deleteComment(commentId, postId, userId) 순서였는데, 컨트롤러에서 deleteComment(commentId, userId, postId)로 순서가 바뀌어 있었습니다. 잘못된 값이 postId 매개변수로 전달되면서 조회 조건과 일치하는 댓글을 찾지 못했습니다.',
+                    solution: '컨트롤러 호출부의 매개변수 순서를 서비스 시그니처에 맞게 수정했습니다.',
+                    result: '댓글 삭제가 정상적으로 동작했습니다.',
+                    learned: 'Postman과 실제 코드는 각각 다른 값을 전달하기 때문에, 테스트 통과가 구현의 정확성을 보장하지는 않습니다. 매개변수가 많은 함수는 객체를 전달하는 방식이 호출 순서 실수를 줄이고 코드의 가독성도 높일 수 있다는 점을 배웠습니다.',
+                },
+                {
+                    title: 'TypeScript Express 타입 확장 — req.user 타입 에러',
+                    symptom: 'JWT 인증 미들웨어에서 req.user에 사용자 정보를 담았지만, 이후 라우트에서 req.user에 접근할 때마다 TypeScript가 "해당 속성이 존재하지 않는다"는 에러를 냈습니다.',
+                    approach: 'req.user를 인식시키려면 Express의 타입을 확장해야 한다는 것을 알고, declare global { namespace Express { interface Request } } 방식으로 선언했습니다. 그런데 에러가 사라지지 않았습니다. 선언 파일 위치와 tsconfig의 포함 여부를 차례로 점검했습니다.',
+                    cause: 'declare global은 전역 스코프를 확장하는 방식으로, Express 모듈 내부의 타입에는 영향을 주지 못했습니다. Express의 타입은 모듈을 통해 관리되기 때문에 declare global만으로는 Request 타입이 확장되지 않았습니다.',
+                    solution: 'declare module "express" { interface Request { user?: User } } 방식으로 변경해 Express 모듈을 직접 증강했습니다.',
+                    result: 'req.user의 타입이 정상적으로 인식되었고, 이후 모든 라우트에서 별도의 타입 단언 없이 사용할 수 있었습니다.',
+                    learned: 'TypeScript에서 전역 선언과 모듈 증강(module augmentation)은 다르게 동작합니다. 외부 라이브러리의 타입을 확장할 때는 그 라이브러리가 어떤 방식으로 타입을 내보내는지 먼저 파악하고, 그에 맞는 선언 방식을 선택해야 합니다.',
+                },
+            ],
             period: '2025.01 - 2025.02 (1개월)',
             myRole: '팀장 (6인) | 여행 일정 관리 풀스택 개발 및 API 설계'
         }
