@@ -425,6 +425,70 @@ input, textarea, select {
                     webpSrc: autoWebp
                 }
             ],
+            troubleshooting: [
+                {
+                    title: 'TypeORM 쿼리 빌더에서 Simple CASE 문법이 작동하지 않는 문제',
+                    symptom: '`cancel_reason` 컬럼에 Simple CASE 구문(`CASE o.cancel_reason WHEN \'CHANGE_OF_MIND\' THEN ...`)을 작성했을 때 `Unknown column \'o.cancelReason\' in \'field list\'` 오류가 발생했습니다.',
+                    approach: '엔티티에 `@Column({ name: \'cancel_reason\' })`으로 DB 컬럼명을 매핑해 두었기 때문에 처음에는 엔티티 설정 문제로 접근하여 컬럼 정의를 재확인했습니다. 이후 TypeORM이 실제로 생성하는 SQL을 로그로 출력해 문제 위치를 파악했습니다.',
+                    cause: 'Simple CASE 구문 내부의 일부 표현식에서 ORM의 컬럼 매핑이 기대한 방식으로 적용되지 않아, TypeScript 프로퍼티명 `cancelReason`이 그대로 SQL에 삽입되면서 실제 DB 컬럼명 `cancel_reason`과 불일치가 발생했습니다.',
+                    solution: 'Simple CASE 구문 대신 Searched CASE 구문(`CASE WHEN o.cancel_reason = \'CHANGE_OF_MIND\' THEN ...`)으로 변경했습니다. 각 `WHEN` 절에서 조건식으로 직접 비교하는 방식이라 ORM의 컬럼명 매핑에 의존하지 않습니다.',
+                    result: '오류가 사라지고 취소 사유가 정상적으로 분류되어 조회되었습니다.',
+                    learned: 'ORM이 생성하는 SQL을 로그로 직접 확인하는 습관이 중요하다는 것을 배웠습니다. ORM 추상화에 의존하기보다 실제 SQL을 기준으로 동작을 검증해야 예상치 못한 매핑 불일치를 빠르게 찾을 수 있습니다.',
+                    code: `// Simple CASE — ORM 컬럼 매핑이 적용되지 않아 오류 발생
+\`CASE o.cancel_reason
+  WHEN 'CHANGE_OF_MIND' THEN '단순 변심'
+  WHEN 'OUT_OF_STOCK' THEN '판매자 품절 안내'
+  ...
+END\`
+
+// Searched CASE — 조건식으로 직접 비교하여 정상 동작
+\`CASE
+  WHEN o.cancel_reason = 'CHANGE_OF_MIND' THEN '단순 변심'
+  WHEN o.cancel_reason = 'OUT_OF_STOCK' THEN '판매자 품절 안내'
+  ...
+END\``
+                },
+                {
+                    title: 'GCP Cloud Run 배포 후 Slack API 인증 실패(not_authed) 문제',
+                    symptom: '로컬에서는 Slack 파일 업로드가 정상 작동했는데, Cloud Run 배포 후 `Error: An API error occurred: not_authed` 오류가 발생하며 전송이 실패했습니다.',
+                    approach: '봇 토큰과 채널 ID는 GCP 콘솔 트리거에 환경변수로 등록되어 있었기 때문에 처음에는 원인을 찾기 어려웠습니다. Cloud Run 로그를 통해 런타임 환경에서 해당 환경변수가 주입되지 않은 상태임을 확인했습니다.',
+                    cause: 'GCP Cloud Build 트리거에 환경변수를 등록해도, `cloudbuild.yaml`의 `gcloud run deploy` 명령에서 `--set-env-vars`로 명시적으로 전달하지 않으면 서버(Cloud Run)에는 값이 주입되지 않습니다. 트리거에 등록된 변수는 빌드 프로세스 내부에서만 접근 가능하며, 런타임 환경에서 사용하려면 yaml 파일에서 별도로 매핑해야 합니다.',
+                    solution: '`cloudbuild.yaml`의 배포 명령에 `--set-env-vars` 옵션을 추가하여 빌드 타임 변수가 런타임 환경변수로 전달되도록 수정했습니다.',
+                    result: 'Cloud Run 서버가 봇 토큰을 정상적으로 읽어 인증에 성공하고 Slack으로 파일이 전송되었습니다.',
+                    learned: 'CI/CD 환경에서는 빌드 설정과 런타임 환경변수가 분리되어 있어, 배포 단계별로 변수 전달 흐름을 반드시 확인해야 한다는 점을 배웠습니다. 배포 후 예상치 못한 인증 오류가 발생하면 코드보다 환경변수 주입 흐름을 먼저 점검하는 것이 효율적입니다.',
+                    code: `# cloudbuild.yaml 수정 전 — 환경변수가 서버에 전달되지 않음
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'my-service', '--image', 'gcr.io/$PROJECT_ID/my-service']
+
+# cloudbuild.yaml 수정 후 — --set-env-vars로 런타임에 명시적 전달
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+    - 'run'
+    - 'deploy'
+    - 'my-service'
+    - '--image'
+    - 'gcr.io/$PROJECT_ID/my-service'
+    - '--set-env-vars'
+    - 'SLACK_BOT_TOKEN=$_SLACK_BOT_TOKEN,SLACK_CHANNEL_ID=$_SLACK_CHANNEL_ID'`
+                },
+                {
+                    title: '배포 후 Slack Webhook URL이 404를 반환하는 문제',
+                    symptom: 'Cloud Run 배포 후 Slack 메시지 전송 시 `AxiosError: Request failed with status code 404` 오류가 발생하며 전송이 실패했습니다.',
+                    approach: '코드 자체는 로컬에서 정상 작동했기 때문에 환경변수가 서버에 올바르게 전달되는지 먼저 확인했습니다. 이후 `curl`로 Webhook URL에 직접 테스트 메시지를 보내 URL 자체의 유효성을 검증했습니다.',
+                    cause: '환경변수에 등록된 Webhook URL이 Slack 측에서 무효화된 상태였습니다. Slack 앱 설정이 변경되거나 재생성되면 기존 URL은 무효화될 수 있는데, 이를 확인하지 않고 그대로 사용하고 있었습니다.',
+                    solution: '`curl`로 응답(`ok` / `no_service`)을 확인하여 URL이 유효하지 않음을 검증한 뒤, Slack 앱 설정에서 Webhook URL을 재발급받아 환경변수를 갱신했습니다.',
+                    result: '유효한 URL로 갱신 후 메시지가 Slack 채널에 정상적으로 전송되었습니다.',
+                    learned: '외부 API 연동 시 "코드 정상 동작"과 "외부 설정 유효성"을 반드시 분리해서 검증해야 한다는 점을 배웠습니다. `curl`로 엔드포인트를 직접 호출하는 방식은 코드와 무관하게 API 상태를 빠르게 확인할 수 있는 효과적인 방법입니다.',
+                    code: `# Webhook URL 유효성 검증 — ok: 유효 / no_service: 무효
+curl -X POST -H 'Content-type: application/json' \\
+  --data '{"text":"test"}' \\
+  https://hooks.slack.com/services/XXXX/XXXX/XXXX
+
+# 응답 예시
+ok        # 정상
+no_service  # URL 무효화됨 → 재발급 필요`
+                }
+            ],
             period: '2025.11 - 2025.12 (1개월)',
             myRole: '백엔드 개발 | 자동화 시스템 구축 및 GCP 배포'
         }
