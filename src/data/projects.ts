@@ -243,6 +243,62 @@ AI 챗봇 서비스의 프론트엔드를 개발하고 GCP에 배포했습니다
                     webpSrc: pengdi4
                 }
             ],
+            troubleshooting: [
+                {
+                    title: '로딩 메시지 타이머가 경과 시간과 무관하게 항상 첫 번째 그룹만 출력되는 버그',
+                    symptom: '5초마다 로딩 메시지를 그룹별로 바꾸도록 구현했는데, 시간이 지나도 항상 GROUP_1 메시지만 출력되었습니다.',
+                    approach: '그룹 분기 로직 자체는 문제가 없었습니다. setInterval 내부에서 경과 시간 계산에 사용하는 startTime 값을 출력해보니, 타이머가 돌아가는 동안 항상 최초 시작 시점의 값이 찍혔습니다. 시간이 흘러도 값이 갱신되지 않았습니다.',
+                    cause: 'startTime을 일반 변수로 선언했기 때문에, setInterval 콜백이 생성된 시점의 startTime을 클로저로 캡처해 이후에도 값이 갱신되지 않았습니다.',
+                    solution: 'startTime과 타이머 ID를 useRef로 관리하도록 변경했습니다. useRef는 리렌더링과 무관하게 최신 값을 유지하기 때문에 setInterval 내부에서도 정확한 시작 시간을 참조할 수 있었습니다. 또한 API 응답 직후와 메시지 교체 직전에 stopTimer()를 두 번 호출해, 응답 속도와 무관하게 타이머가 메시지를 덮어쓰는 것을 이중으로 방지했습니다.',
+                    result: '경과 시간에 따라 GROUP_1부터 GROUP_6까지 순서대로 메시지가 전환되었습니다.',
+                    learned: 'setInterval 콜백은 생성 시점의 변수를 클로저로 캡처하기 때문에, 시간이 지나도 갱신이 필요한 값은 useRef로 관리해야 합니다. 비동기 타이머 환경에서는 중단 처리를 방어적으로 이중으로 작성하는 것이 안전하다는 점을 배웠습니다.',
+                    code: `const intervalRef = useRef<NodeJS.Timeout | null>(null);
+const startTimeRef = useRef<number>(0);
+
+const startTimer = (id: number) => {
+  startTimeRef.current = Date.now();
+
+  intervalRef.current = setInterval(() => {
+    const elapsed = (Date.now() - startTimeRef.current) / 1000;
+    updateLoadingMessage(id, getGroupKey(elapsed));
+  }, 5000);
+};
+
+const stopTimer = () => {
+  if (intervalRef.current) {
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  }
+};`,
+                },
+                {
+                    title: '첫 화면 진입 시 봇 메시지 상단이 잘려서 보이는 문제',
+                    symptom: '채팅 페이지에 진입하면 봇의 첫 인사 메시지가 화면 위쪽이 잘린 채로 표시되었습니다. 스크롤을 올려야 전체 메시지를 볼 수 있었습니다.',
+                    approach: '메시지가 추가될 때마다 스크롤을 아래로 이동시키는 useEffect가 있었습니다. 첫 진입 시에도 이 로직이 실행되는지 확인하니, 봇의 초기 메시지가 추가되는 시점에도 스크롤이 하단으로 이동하고 있었습니다.',
+                    cause: '스크롤 이동 조건이 메시지 개수와 무관하게 항상 실행되고 있었습니다. 봇의 초기 메시지가 추가되는 시점에도 스크롤이 하단으로 이동해 첫 메시지 상단이 화면 밖으로 밀려났습니다.',
+                    solution: '스크롤 이동 조건을 messages.length > 1일 때만 실행되도록 수정했습니다. 첫 메시지는 스크롤을 내리지 않고 상단에서 그대로 보이도록 처리했습니다.',
+                    result: '첫 진입 시 봇의 인사 메시지가 상단부터 온전히 표시되었고, 이후 메시지 추가 시에는 정상적으로 스크롤이 내려갔습니다.',
+                    learned: 'useEffect로 스크롤을 제어할 때는 초기 렌더링과 이후 메시지 추가를 구분해야 합니다. 렌더링 시점에 따라 동일한 로직이 다르게 동작할 수 있고, 조건 없이 적용하면 초기 상태에서 의도치 않은 동작이 생길 수 있다는 점을 배웠습니다.',
+                    code: `useEffect(() => {
+  const currentCount = messages.length;
+  if (chatRef.current && currentCount > 1) {
+    const container = chatRef.current;
+    if (container.scrollHeight > container.clientHeight) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }
+}, [messages]);`,
+                },
+                {
+                    title: '배포 후 챗봇 API 응답이 JSON이 아닌 HTML로 반환되는 문제',
+                    symptom: 'GCP Cloud Run에 배포한 뒤 채팅을 시도하면 서버 응답이 JSON 대신 HTML 문자열로 반환되었습니다. 챗봇이 전혀 동작하지 않았습니다.',
+                    approach: 'API 요청 URL을 확인하니 백엔드 서버 주소가 아닌 프론트엔드 배포 URL로 요청이 가고 있었습니다. 환경변수 설정을 먼저 점검했고, 값 자체는 올바르게 설정되어 있었습니다. 그 다음 실제 배포된 빌드가 어느 브랜치를 기준으로 생성됐는지 확인했습니다.',
+                    cause: 'dev 브랜치에서 수정한 API URL 코드를 main 브랜치에 머지하지 않은 상태로 배포했습니다. Cloud Run은 main 기준으로 빌드됐기 때문에 수정 이전 코드가 그대로 배포되어 있었습니다.',
+                    solution: 'dev 브랜치를 main으로 머지한 뒤 재배포했습니다.',
+                    result: '챗봇 API가 정상적으로 JSON 응답을 반환했고 채팅이 정상 동작했습니다.',
+                    learned: '배포 문제는 코드 자체보다 "어떤 브랜치가 실제로 배포되었는지"부터 확인해야 한다는 점을 배웠습니다. 설정이나 환경변수가 올바르게 보이더라도, 실제 배포에 사용된 브랜치가 다르면 변경 사항이 반영되지 않을 수 있다는 점을 배웠습니다.',
+                },
+            ],
             period: '2025.10 - 2025.11 (1개월)',
             myRole: '프론트엔드 개발 | React 개발 및 GCP 배포'
         }
