@@ -247,7 +247,7 @@ Zustand 전역 상태 관리, Kakao Maps SDK 연동, Gemini AI 연동을 직접 
                     cause: '`useEffect`는 렌더링 이후에 실행되기 때문에, step이 변경되면 이전 메시지가 한 프레임 먼저 렌더링된 뒤 새로운 메시지로 갱신됐습니다.',
                     solution: '`useState`를 제거하고 현재 step을 기준으로 메시지를 계산하는 방식(derived value: 별도 상태 없이 현재 값으로 계산하는 방식)으로 변경했습니다. 불필요한 상태를 제거해 렌더 결과와 데이터가 항상 일치하도록 만들 수 있어 가장 적절한 방법이라고 판단했습니다.',
                     result: '수정 후 단계 전환 시 이전 메시지가 노출되지 않았고 깜빡임도 사라졌습니다.',
-                    learned: '불필요한 상태를 만들지 않는 게 왜 중요한지 체감했습니다.',
+                    learned: '화면에서 계산할 수 있는 값이라면 별도 상태로 관리하지 않는 것이 더 단순하고 안정적인 구조라는 점을 배웠습니다.',
                     code: `// Before
 const [message, setMessage] = useState('')
 useEffect(() => { setMessage(getMsg(step)) }, [step])
@@ -262,7 +262,7 @@ const message = getMsg(step)`,
                     cause: '`createBrowserClient`는 브라우저에 저장된 세션을 비동기로 복원합니다. 업로드 요청이 세션 복원보다 먼저 실행되면서 로그인 정보가 Authorization 헤더에 포함되지 않았습니다.',
                     solution: '`getUser()`를 먼저 호출해 로그인 정보가 복원된 이후 업로드 요청이 실행되도록 순서를 변경했습니다. 인증 로직을 우회하기보다 세션 초기화 순서를 보장하는 방향이 라이브러리 동작 방식에도 맞는 해결책이라고 판단했습니다.',
                     result: '이후 업로드 요청에 Authorization 헤더에 JWT가 정상적으로 포함되면서 400 오류 없이 업로드가 완료됐습니다.',
-                    learned: '"로그인됐다"와 "세션이 요청에 실렸다"는 다른 문제였습니다. 라이브러리의 초기화 타이밍을 파악하지 못하면 인증이 됐다고 생각하면서 엉뚱한 곳을 뒤지게 됩니다.',
+                    learned: '"로그인됐다"와 "세션이 요청에 실렸다"는 다른 문제였습니다. 라이브러리의 초기화 타이밍을 이해하지 못하면 인증 문제의 원인을 잘못 판단할 수 있다는 점을 배웠습니다.',
                     code: `await supabase.auth.getUser()
 await supabase.storage.from('bucket').upload(path, file)`,
                 },
@@ -273,7 +273,7 @@ await supabase.storage.from('bucket').upload(path, file)`,
                     cause: 'iOS Safari는 `font-size`가 16px 미만인 input에 포커스하면 가독성을 위해 자동으로 줌인합니다. 입력 필드들이 14px였습니다.',
                     solution: '입력 요소의 기본 `font-size`를 16px 이상으로 조정해 iOS Safari의 자동 확대 조건을 만족하도록 수정했습니다. viewport 설정을 변경하면 접근성을 해칠 수 있어 브라우저 권장 방식인 폰트 크기 조정을 선택했습니다.',
                     result: '이후 iOS Safari에서도 화면 확대 없이 자연스럽게 입력할 수 있었습니다.',
-                    learned: '단순히 동작을 막는 방법보다 브라우저 동작 원인과 접근성을 함께 고려해 해결하는 것이 중요하다는 점을 배웠습니다.',
+                    learned: '빠르게 문제를 해결하는 것보다 브라우저의 동작 원인을 이해하고 접근성을 함께 고려해 해결하는 것이 더 중요하다는 점을 배웠습니다.',
                     code: `/* globals.css */
 input, textarea, select {
   font-size: 16px;
