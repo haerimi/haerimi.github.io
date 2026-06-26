@@ -151,6 +151,18 @@ export const projects: Project[] = [
                     solution: 'Comments 엔티티에 @Column() postId!: number를 추가해 find({ where: { postId } })에서 postId를 정상적으로 조회 조건으로 사용할 수 있도록 수정했습니다.',
                     result: '각 게시글이 자신에게 달린 댓글만 정확히 표시되었습니다.',
                     learned: 'TypeORM에서 관계 선언과 컬럼 선언은 서로 다른 역할을 합니다. ORM이 자동으로 처리해 줄 것이라고 가정하기보다, 실제 쿼리가 어떻게 생성되는지 확인하는 습관이 중요하다는 점을 배웠습니다.',
+                    code: `// Before — postId 컬럼 선언 없음
+@ManyToOne(() => Posts, (post) => post.id, { onDelete: 'CASCADE' })
+@JoinColumn({ name: 'post_id' })
+post: Posts;
+
+// After — @Column()으로 명시적 선언 추가
+@Column()
+postId!: number;
+
+@ManyToOne(() => Posts, (post) => post.id, { onDelete: 'CASCADE' })
+@JoinColumn({ name: 'post_id' })
+post: Posts;`,
                 },
                 {
                     title: '댓글 삭제 시 404 에러 — 매개변수 순서 오류',
@@ -160,6 +172,11 @@ export const projects: Project[] = [
                     solution: '컨트롤러 호출부의 매개변수 순서를 서비스 시그니처에 맞게 수정했습니다.',
                     result: '댓글 삭제가 정상적으로 동작했습니다.',
                     learned: 'Postman과 실제 코드는 각각 다른 값을 전달하기 때문에, 테스트 통과가 구현의 정확성을 보장하지는 않습니다. 매개변수가 많은 함수는 객체를 전달하는 방식이 호출 순서 실수를 줄이고 코드의 가독성도 높일 수 있다는 점을 배웠습니다.',
+                    code: `// Before
+CommunityServices.deleteComment(commentId, userId, postId)
+
+// After
+CommunityServices.deleteComment(commentId, postId, userId)`,
                 },
                 {
                     title: 'TypeScript Express 타입 확장 — req.user 타입 에러',
@@ -169,6 +186,17 @@ export const projects: Project[] = [
                     solution: 'declare module "express" { interface Request { user?: User } } 방식으로 변경해 Express 모듈을 직접 증강했습니다.',
                     result: 'req.user의 타입이 정상적으로 인식되었고, 이후 모든 라우트에서 별도의 타입 단언 없이 사용할 수 있었습니다.',
                     learned: 'TypeScript에서 전역 선언과 모듈 증강(module augmentation)은 다르게 동작합니다. 외부 라이브러리의 타입을 확장할 때는 그 라이브러리가 어떤 방식으로 타입을 내보내는지 먼저 파악하고, 그에 맞는 선언 방식을 선택해야 합니다.',
+                    code: `// Before
+declare global {
+  namespace Express {
+    interface Request { user?: User }
+  }
+}
+
+// After
+declare module 'express' {
+  interface Request { user?: User }
+}`,
                 },
             ],
             period: '2025.01 - 2025.02 (1개월)',
