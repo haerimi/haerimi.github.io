@@ -1,6 +1,6 @@
 import { DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { FeatureDetail, Project } from '@/data/projects'
+import { FeatureDetail, Project, TroubleshootingItem } from '@/data/projects'
 import ReactMarkdown from 'react-markdown'
 import { useCallback, useMemo, useState } from 'react'
 import Modal from '@/components/Modal'
@@ -10,6 +10,39 @@ interface ProjectDetailProps {
     project: Project
     onClose: () => void
 }
+
+const TAG_STYLES: Record<string, string> = {
+    '증상': 'bg-red-50 text-red-600',
+    '접근': 'bg-amber-50 text-amber-700',
+    '원인': 'bg-purple-50 text-purple-700',
+    '해결': 'bg-green-50 text-green-700',
+    '결과': 'bg-blue-50 text-blue-700',
+    '배운 점': 'bg-gray-100 text-gray-600',
+};
+
+const TroubleshootingRow = ({ label, text }: { label: string; text: string }) => (
+    <div className="flex gap-3 text-sm leading-relaxed">
+        <span className={`mt-0.5 shrink-0 rounded px-2 py-0.5 text-xs font-medium ${TAG_STYLES[label]}`}>{label}</span>
+        <span className="text-gray-700">{text}</span>
+    </div>
+);
+
+const TroubleshootingCard = React.memo(({ item }: { item: TroubleshootingItem }) => (
+    <div className="rounded-lg border border-gray-100 bg-gray-50 p-4 space-y-3">
+        <p className="font-semibold text-gray-900 text-sm">{item.title}</p>
+        <TroubleshootingRow label="증상" text={item.symptom} />
+        <TroubleshootingRow label="접근" text={item.approach} />
+        <TroubleshootingRow label="원인" text={item.cause} />
+        <TroubleshootingRow label="해결" text={item.solution} />
+        <TroubleshootingRow label="결과" text={item.result} />
+        <TroubleshootingRow label="배운 점" text={item.learned} />
+        {item.code && (
+            <pre className="mt-1 overflow-x-auto rounded bg-gray-900 p-3 text-xs text-gray-100 leading-relaxed whitespace-pre">
+                <code>{item.code}</code>
+            </pre>
+        )}
+    </div>
+));
 
 const FeatureItem = React.memo(({ feature, onImageClick }: { feature: FeatureDetail, onImageClick: (f: FeatureDetail) => void }) => (
     <div className="flex flex-col gap-2">
@@ -81,6 +114,14 @@ export default function ProjectModal({ onClose, project }: ProjectDetailProps) {
                                 <h4 className="font-bold text-lg border-b pb-2 ">Features</h4>
                                 {project.details.features.map((feature, index) => (
                                     <FeatureItem key={index} feature={feature} onImageClick={handleImageClick} />
+                                ))}
+                            </div>
+                        )}
+                        {project.details.troubleshooting && (
+                            <div className="mt-8 space-y-4">
+                                <h4 className="font-bold text-lg border-b pb-2">Troubleshooting</h4>
+                                {project.details.troubleshooting.map((item, index) => (
+                                    <TroubleshootingCard key={index} item={item} />
                                 ))}
                             </div>
                         )}
